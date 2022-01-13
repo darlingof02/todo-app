@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthenticationService from './AuthenticationService.js'
+import {Formik, Field, Form} from 'formik'
+
 
 class LoginComponent extends Component {
    
@@ -31,34 +33,7 @@ class LoginComponent extends Component {
     }
 
     loginClicked() {
-        // console.log("click")
         
-        // if ('') {
-        //     // console.log("Successful")
-        //     AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
-        //     this.props.navigate(`/welcome/${this.state.username}`)
-            
-        // }
-        // else {
-        //     // console.log("Failed")
-        //     this.setState({
-        //         hasLoginFailed : true,
-        //         showSuccessMessage : false
-        //     })
-        // }
-
-        // AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
-        // .then( () => {
-        //         AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
-        //         this.props.navigate(`/welcome/${this.state.username}`)
-        //     }
-        // ).catch( () => {
-        //         this.setState({
-        //             hasLoginFailed : true,
-        //             showSuccessMessage : false
-        //         })
-        //     }
-        // )
 
         AuthenticationService.executeJwtAuthenticationService(this.state.username, this.state.password)
         .then( (response) => {
@@ -83,11 +58,32 @@ class LoginComponent extends Component {
                 <ShowLoginSuccessfulMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
                 {this.state.hasLoginFailed && <div className='alert alert-warning'>Invalid Credentials</div>}
                 {this.state.showSuccessMessage && <div>Login Successful</div>}
-                <h1>Login</h1>
+                <h1 className='mb-3'>Login</h1>
+
+
                 <div className='container'>
-                    User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}></input>
-                    Password: <input type="password" name = "password" value={this.state.password} onChange={this.handleChange}></input>
-                    <button className='btn btn-success' onClick={this.loginClicked}>Login</button>
+                    <Formik
+                    onSubmit={this.loginClicked}
+                    enableReinitialize={true}
+                    initialValues={this.state}>
+                        <Form>
+                            <div>
+                                <fieldset className='mb-3'>
+                                    <label>username:&nbsp;&nbsp;</label>
+                                    <Field className="form" type='text' name="username" placeholder="input your username" onChange={this.handleChange}></Field>
+                                </fieldset>
+                            </div>
+                            <div>
+                                <fieldset className='mb-3'>
+                                    <label>password:&nbsp;&nbsp;</label>
+                                    <Field className="form" type='password' name="password" onChange={this.handleChange}></Field>
+                                </fieldset>
+                            </div>
+                            <button className='btn btn-success'>Login</button>
+                        </Form>
+                    </Formik>
+
+                    
                 </div>
                 
             </div>

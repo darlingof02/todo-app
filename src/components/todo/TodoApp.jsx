@@ -8,15 +8,17 @@ import FooterComponent from './FooterComponent'
 import LogoutComponent from './LogoutComponent'
 import PrivateRoute from './AuthenticatedRoute.jsx'
 import TodoComponent from './TodoComponent'
+import IndexComponent from './IndexComponent'
+import SignupComponent from './SignupComponent'
 
 class TodoApp extends Component {
     render() {
         return (
             <div className='TodoApp'>
                 <Router>
-                    <HeaderComponent/>
+                <HeaderComponent/>
                     <Routes>
-                        
+                        <Route path="/" element={<IndexComponent/>}/>
                         <Route path="/login" element={<LoginComponent/>}/>
                         <Route path="/welcome/:name" 
                         element={<PrivateRoute>
@@ -35,10 +37,13 @@ class TodoApp extends Component {
                         element={<PrivateRoute>
                                     <TodoComponent/>
                                 </PrivateRoute>}/>
+                        <Route path="/signup" element={<SignupComponent/>}/>
+                        
                                 
                     </Routes>
                     <FooterComponent/>
                 </Router>
+                
 
                 {/* <WelcomeComponent/>
                 <LoginComponent/> */}

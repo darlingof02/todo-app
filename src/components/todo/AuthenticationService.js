@@ -75,6 +75,15 @@ class AuthenticationService {
             }
         )
     }
+
+    signup(username, password) {
+        return axios.post(`${API_URI}/signup`,
+            {
+                "username": username,
+                "password": password
+            }
+        )
+    }
 }
 
 export default new AuthenticationService();
