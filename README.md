@@ -9,7 +9,7 @@ for backend implementation, references [here](https://github.com/darlingof02/res
 ## function
 
 - sign up
-  ![sign up](./imgs/sign up.png)
+  ![sign up](./imgs/sign_up.png)
 - login
   ![login](./imgs/login.png)
 - view todos
